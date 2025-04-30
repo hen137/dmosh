@@ -14,13 +14,9 @@ const Stream = () => {
     fluid: true,
     mute: true,
     sources: [{
-    //   src: "C:\Users\henry\Desktop\dmosh\client\src\assets\tokyo-drift-teriyaki-boyz-music-video-hd-ytshorts.mp4",
-    //   type: "video/mp4"
-    // },
-    // {
-      src: "C:\Users\henry\Desktop\dmosh\client\src\assets\tokyo-drift-teriyaki-boyz-music-video-hd-ytshorts.webm",
-      type: "video/webm"
-    }
+      src: "localhost:3001/video/001",
+      type: "video/mp4"
+    },
     ]
   };
 
@@ -36,7 +32,7 @@ const Stream = () => {
       const videoElement = document.createElement("video-js");
       videoRef.current.appendChild(videoElement); //ignore error - typescript & video.js dont play nice
 
-      const player  = playerRef.current = videojs(videoElement, options, () => {
+      const player = playerRef.current = videojs(videoElement, options, () => {
         console.log('player is ready');
         onReady && onReady(player);
       });

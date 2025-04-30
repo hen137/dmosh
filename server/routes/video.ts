@@ -8,4 +8,4 @@ router.get('/', getVideos);
 
 router.get('/:videoID', getVideo);
 
-module.exports = router;
+export default router;

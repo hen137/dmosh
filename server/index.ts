@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+app.use(videoRoutes);
+
 app.get('/', (req: Request, res: Response) => {
     res.send('yoooo');
 });
