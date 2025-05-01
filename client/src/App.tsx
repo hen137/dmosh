@@ -24,7 +24,7 @@ const App = () => {
   return (
     <>
       <Stream />
-      <Screen />
+      {/* <Screen /> */}
     </>
   );
 };
