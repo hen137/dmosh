@@ -2,10 +2,10 @@ import express from 'express';
 
 const router = express.Router();
 
-import { getVideos, getVideo } from '../controllers/video.ts';
+import { getLocal } from '../controllers/video.ts';
 
-router.get('/', getVideos);
+router.get('/', getLocal);
 
-router.get('/:videoID', getVideo);
+// router.get('/:videoID', getVideo);
 
 export default router;
