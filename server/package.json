@@ -13,16 +13,12 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.799.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "helmet": "^8.1.0",
-    "mime-types": "^3.0.1",
-    "morgan": "^1.10.0"
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
-    "@types/mime-types": "^2.1.4",
     "@types/node": "^22.14.0",
     "eslint": "^9.24.0",
     "globals": "^16.0.0",
