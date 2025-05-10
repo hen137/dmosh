@@ -1,5 +1,5 @@
-import { Writable } from "stream";
 import fs from 'fs';
+import { Writable } from "stream";
 import { Request, Response } from "express";
 import { GetObjectCommand, HeadObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
@@ -36,12 +36,10 @@ export function getLocal(req: Request, res: Response){
 
 export async function getRemote(req: Request, res: Response){
     const range = req.headers.range;
-    
     const objParam = {
         Bucket: 'dmosh-media',
         Key: 'tokyo-drift-teriyaki-boyz-music-video-hd-ytshorts.mp4'
     }
-
     const headers = {
         "Accept-Ranges": "bytes",
         "Content-Type": "video/mp4"
@@ -50,9 +48,8 @@ export async function getRemote(req: Request, res: Response){
     const s3 = new S3Client({
         region: 'us-east-2'
     });
-    
     const { ContentLength } = await s3.send(new HeadObjectCommand(objParam)); 
-    
+
     if (!range) {
         const obj = await s3.send(new GetObjectCommand(objParam));
         
@@ -60,7 +57,7 @@ export async function getRemote(req: Request, res: Response){
             ...headers,
             "Content-Length": ContentLength,
         });
-        obj.Body!.transformToWebStream().pipeTo(Writable.toWeb(res));
+        obj.Body?.transformToWebStream().pipeTo(Writable.toWeb(res));
     } else {
         const CHUNK_SIZE = 10 ** 6;
         const start = Number(range?.replace(/\D/g, ''));
@@ -71,12 +68,12 @@ export async function getRemote(req: Request, res: Response){
             ...objParam,
             Range: `bytes=${start}-${end}`
         }));
-        
+
         res.writeHead(206, {
             ...headers,
             "Content-Range": `bytes ${start}-${end}/${ContentLength}`,
             "Content-Length": contentLength
         });
-        obj.Body!.transformToWebStream().pipeTo(Writable.toWeb(res));
+        obj.Body?.transformToWebStream().pipeTo(Writable.toWeb(res));
     }
 }
